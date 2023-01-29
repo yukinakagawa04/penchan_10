@@ -2,48 +2,82 @@
 include('functions.php');
 session_start();
 
+//入力チェック
 if (
-    !isset($_POST['email']) || $_POST['email'] === '' ||
-    !isset($_POST['password']) || $_POST['password'] === ''
+    !isset($_POST['username']) || $_POST['username'] === '' ||
+    !isset($_POST['penguinname']) || $_POST['penguinname'] === '' ||
+    !isset($_POST['birth']) || $_POST['birth'] === '' ||
+    !isset($_POST['penguinvalue']) || $_POST['penguinvalue'] === '' ||
+    !isset($_POST['feature']) || $_POST['feature'] === '' ||
+    !isset($_POST['place']) || $_POST['place'] === ''
 ) {
     exit('paramError');
 }
 
-$email = $_POST["email"];
-$password = $_POST["password"];
+//データ受け取り
+$username = $_POST["username"];
+$penguinname = $_POST["penguinname"];
+$birth = $_POST["birth"];
+$penguinvalue = $_POST["penguinvalue"];
+$feature = $_POST["feature"];
+$place = $_POST["place"];
 
+
+
+// DB接続
 $pdo = connect_to_db();
 
-$sql = 'SELECT COUNT(*) FROM penguin_table WHERE email=:email';
+// SQL作成
+$sql =
+    'INSERT INTO penguin_table
+            (
+                penguin_id,
+                username,
+                penguinname,
+                birth,
+                penguinvalue,
+                feature,
+                place,
+                created_at,
+                updated_at
+            )
+            VALUES
+            (
+                NULL,
+                :username,
+                :penguinname,
+                :birth,
+                :penguinvalue,
+                :feature,
+                :place,
+                now(),
+                now()
+            )';
+
+
 
 $stmt = $pdo->prepare($sql);
-$stmt->bindValue(':email', $email, PDO::PARAM_STR);
 
+
+// バインド変数を設定
+// $stmt->bindValue(':penguin_id', $penguin_id, PDO::PARAM_INT);
+$stmt->bindValue(':username', $username, PDO::PARAM_STR);
+$stmt->bindValue(':penguinname', $penguinname, PDO::PARAM_STR);
+$stmt->bindValue(':birth', $birth, PDO::PARAM_STR);
+$stmt->bindValue(':penguinvalue', $penguinvalue, PDO::PARAM_STR);
+$stmt->bindValue(':feature', $feature, PDO::PARAM_STR);
+$stmt->bindValue(':place', $place, PDO::PARAM_STR);
+
+
+
+// SQL実行（実行に失敗すると `sql error ...` が出力される）
 try {
     $status = $stmt->execute();
 } catch (PDOException $e) {
     echo json_encode(["sql error" => "{$e->getMessage()}"]);
-    exit();
+    exit('sql error');
 }
 
-if ($stmt->fetchColumn() > 0) {
-    echo '<p>すでに登録されているユーザです．</p>';
-    echo '<a href="login.php">login</a>';
-    exit();
-}
 
-$sql = 'INSERT INTO users_table(id, email, password, is_admin, created_at, updated_at, deleted_at) VALUES(NULL, :email, :password, 0, now(), now(), NULL)';
-
-$stmt = $pdo->prepare($sql);
-$stmt->bindValue(':email', $email, PDO::PARAM_STR);
-$stmt->bindValue(':password', $password, PDO::PARAM_STR);
-
-try {
-    $status = $stmt->execute();
-} catch (PDOException $e) {
-    echo json_encode(["sql error" => "{$e->getMessage()}"]);
-    exit();
-}
-
-header("Location:login.php");
+header("Location:top.php");
 exit();

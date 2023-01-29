@@ -18,6 +18,8 @@
             ペンギン登録後は誰でも編集できるようになります。入力できる項目のみお願いします。
         </div>
         <div>
+            記入者ニックネーム
+            <input type="text" name="username">
             ペンギンの名前
             <input type="text" name="penguinname">
             孵化日
@@ -33,7 +35,7 @@
 
             <input type="file">
         </div>
-        <button>登録する</button>
+        <button value="button">登録する</button>
         </div>
     </form>
 </body>
@@ -41,6 +43,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
     $('button').on("click", function () {
-        alert('変更が完了しました。ログアウトしてもう一度ログインしてください。');
+        alert('ペンギン登録が完了しました。');
     });
 </script>
