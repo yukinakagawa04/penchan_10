@@ -33,8 +33,11 @@ if (!$user) {
     exit();
 } else {
     $_SESSION = array();
+    //講義のやつ
+    // $_SESSION['user_id'] = $user['user_id'];
+    //先週まで書いたやつ
+    $_SESSION['user_id'] = $user['id'];
     $_SESSION['session_id'] = session_id();
-    $_SESSION['id'] = $user['id'];
     $_SESSION['is_admin'] = $user['is_admin'];
     $_SESSION['email'] = $user['email'];
     $_SESSION['password'] = $user['password'];
