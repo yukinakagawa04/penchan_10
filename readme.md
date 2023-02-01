@@ -1,34 +1,28 @@
-# AQUALAND 会員ログインとプロフィール変更
+# AQUALAND いいね機能の実装
 
 ## DEMO
 
 ## 紹介と使い方
 
-- Web アプリ『AQUALAND』のログイン画面と登録内容変更画面です。
+- Web アプリ『AQUALAND』のペン活日記にいいね機能を実装しました。
 
 ## 工夫した点
 
-- login_act.php にある session() からメールアドレスと PW を引っ張ってきました。
+- ペン活日記を top.php に表示し、日記ごとにいいねができるようになりました。
+- ペンギンはお魚さんが好きなので、いいねされると黒色から青色のお魚さんになります。
+- ペンギン DB を自前で理解するためにとりあえずスプシで書き並べてみました。https://docs.google.com/spreadsheets/d/1wbtyERYjBIJ4Pn1mtsS9SXPEle3yVylHBUpvLv0NaL4/edit?usp=sharing
 
 ## 苦戦した点
 
-- 解約実装がうまく行かなかったです (withdraw.php と delete.php)
+- 今のところ、いいねの条件分岐が i=1 以上だと青色のお魚さんが表示されてしまうので、UI 機能としてはまだ達成できていない模様。
+- PHP で画像を入れるの金曜日でやりたい
+- 管理者画面って何を表示するべきなのかいまいち把握できていない
 
 ## 参考にした web サイトなど
 
 - 後で見返せるように
 
-- 【コピペで使える】ログイン機能の簡単実装サンプル（PHP／MySQL）
-  - https://tadworks.jp/archives/1147
-- PHP ログイン機能
-  - https://qiita.com/ryo-futebol/items/5fb635199acc2fcbd3ff
-- php でのログイン機能の実装方法について詳しく解説します
-  - https://webukatu.com/wordpress/blog/27673/#php-2
-- PHP と MySQL を使った会員登録システムの作り方
-  - https://www.tomotaku.com/programing-join-system/
-- 【コピペで簡単】css で画面いっぱいに画像を魅せる方法。スマホも PC も大きな画像を見せたい！(今回は使わなかったけど学んだ)
-
-  - https://rui-log.com/css-cover-image/#:~:text=1%E3%81%A4%E7%9B%AE%E3%81%AF%E3%80%8Cbackground,%E3%82%92100%25%E3%81%A7%E8%A6%8B%E3%81%9B%E3%81%BE%E3%81%99%E3%80%82
-
 - 質問「画像って SQL で保存できますか？」
   - SQL 使って DB に保存するのは基本的に画像のパスです。画像自体は DB に入れるというよりは別のところにアップロードして、DB にはその画像にアクセスするための情報を入れておくイメージです。(マキさん)
+- 内田さんのアイデア「いいねしたらボタンが変わるやつ」 https://devf12-uy03.slack.com/archives/C042ZA17HHB/p1674288730637529
+- PHP の型一覧　変数の型とタイプヒンティングできる型は別 https://qiita.com/minato-naka/items/abd7f76dca2b15a7d6ba
