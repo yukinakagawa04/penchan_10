@@ -12,7 +12,7 @@
 
 <body>
 
-    <form action="penguin_act.php" method="POST" class="content">
+    <form action="penguin_act.php" method="POST" class="content" enctype="multipart/form-data">
         <legend>ペンギン登録フォーム</legend>
         <div>
             ペンギン登録後は誰でも編集できるようになります。入力できる項目のみお願いします。
@@ -32,8 +32,7 @@
             <input type="text" name="place">
         </div>
         <div>画像を登録
-
-            <input type="file">
+            <td><input type="file" name="pic" accept="image/*"></td>
         </div>
         <button value="button">登録する</button>
         </div>
@@ -44,5 +43,17 @@
 <script>
     $('button').on("click", function () {
         alert('ペンギン登録が完了しました。');
+    });
+</script>
+
+<script>
+    $('.file').on('change', function (e) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('.thumbnail').attr('style', 'background-image: url(' + e.target.result + ');');
+        };
+        reader.readAsDataURL(e.target.files[0]);
+
     });
 </script>

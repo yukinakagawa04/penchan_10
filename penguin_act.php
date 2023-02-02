@@ -9,7 +9,9 @@ if (
     !isset($_POST['birth']) || $_POST['birth'] === '' ||
     !isset($_POST['penguinvalue']) || $_POST['penguinvalue'] === '' ||
     !isset($_POST['feature']) || $_POST['feature'] === '' ||
-    !isset($_POST['place']) || $_POST['place'] === ''
+    !isset($_POST['place']) || $_POST['place'] === '' ||
+    !isset($_FILES['pic']['name']) || $_FILES['pic']['name'] === '' ||
+    !isset($_FILES['pic']['type']) || $_FILES['pic']['type'] === ''
 ) {
     exit('paramError');
 }
@@ -21,6 +23,14 @@ $birth = $_POST["birth"];
 $penguinvalue = $_POST["penguinvalue"];
 $feature = $_POST["feature"];
 $place = $_POST["place"];
+$type = $_FILES['pic']['type'];
+$upimg = $_FILES['pic']['name'];
+
+$upload_dir = '../Desktop/';
+$uploaded_path = date('YmdHis') . $upimg;
+$save_path = $upload_dir . $uploaded_path;
+
+$upload = move_uploaded_file($_FILES['pic']['tmp_name'], $save_path);
 
 
 
@@ -38,6 +48,8 @@ $sql =
                 penguinvalue,
                 feature,
                 place,
+                img_type,
+                photo,
                 created_at,
                 updated_at
             )
@@ -50,6 +62,8 @@ $sql =
                 :penguinvalue,
                 :feature,
                 :place,
+                :img_type,
+                :photo,
                 now(),
                 now()
             )';
@@ -67,7 +81,8 @@ $stmt->bindValue(':birth', $birth, PDO::PARAM_STR);
 $stmt->bindValue(':penguinvalue', $penguinvalue, PDO::PARAM_STR);
 $stmt->bindValue(':feature', $feature, PDO::PARAM_STR);
 $stmt->bindValue(':place', $place, PDO::PARAM_STR);
-
+$stmt->bindValue(':img_type', $type, PDO::PARAM_STR);
+$stmt->bindValue(':photo', $save_path, PDO::PARAM_STR);
 
 
 // SQL実行（実行に失敗すると `sql error ...` が出力される）
@@ -81,3 +96,4 @@ try {
 
 header("Location:top.php");
 exit();
+?>

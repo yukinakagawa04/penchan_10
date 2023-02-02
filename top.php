@@ -55,14 +55,12 @@ foreach ($result as $record) {
     <p>{$record["penguinvalue"]}</p>
     <p>{$record["feature"]}</p>
     <p>{$record["place"]}</p>
-    <td><a href='like_create.php?user_id={$user_id}&todo_id={$record["penguin_id"]}'>like{$record['like_count']}</a></td>
-    <td><img src=$images alt=PL class='bigfish'></td>
+    <td><a href='like_create.php?user_id={$user_id}&todo_id={$record["penguin_id"]}'><img src=$images alt=PL class='bigfish'><hidden{$record['like_count']}></a></td>
     <td><a href='todo_edit.php?id={$record["id"]}'>edit</a></td>
     <td><a href='todo_delete.php?id={$record["id"]}'>delete</a></td>
 
     <hr>
     </div>";
-
 }
 ?>
 
@@ -94,23 +92,11 @@ foreach ($result as $record) {
         <div>
 
             <?= $output ?>
+            <?php foreach ($result as $record): ?>
+                <img src="<?php echo $record["photo"] ?>">
+            <?php endforeach; ?>
         </div>
-        <!-- 登録したペンギンが画面に出る。写真、名前、場所 -->
-        <!-- <table>
-            <thead>
-                <tr>
-                    <th>記入者ニックネーム</th>
-                    <th>ペンギンの名前</th>
-                    <th>孵化日</th>
-                    <th>ペンギンの種類</th>
-                    <th>ペンギンの特徴</th>
-                    <th>施設名</th>
-                </tr>
-            </thead>
-            <tbody>
 
-            </tbody>
-        </table> -->
     </div>
     <div class="content">
         <div class="control">
