@@ -26,7 +26,7 @@ $place = $_POST["place"];
 $type = $_FILES['pic']['type'];
 $upimg = $_FILES['pic']['name'];
 
-$upload_dir = '../Desktop/';
+$upload_dir = '';
 $uploaded_path = date('YmdHis') . $upimg;
 $save_path = $upload_dir . $uploaded_path;
 

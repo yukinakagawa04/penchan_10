@@ -1,7 +1,7 @@
 <?php
 session_start();
 include("functions.php");
-// check_session_id();
+check_session_id();
 
 
 $pdo = connect_to_db();
@@ -40,6 +40,11 @@ try {
 
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+
+
+
+
+
 $output = "";
 foreach ($result as $record) {
     if ($record["like_count"] >= 1) {
@@ -55,6 +60,7 @@ foreach ($result as $record) {
     <p>{$record["penguinvalue"]}</p>
     <p>{$record["feature"]}</p>
     <p>{$record["place"]}</p>
+
     <td><a href='like_create.php?user_id={$user_id}&todo_id={$record["penguin_id"]}'><img src=$images alt=PL class='bigfish'><hidden{$record['like_count']}></a></td>
     <td><a href='todo_edit.php?id={$record["id"]}'>edit</a></td>
     <td><a href='todo_delete.php?id={$record["id"]}'>delete</a></td>
@@ -93,7 +99,7 @@ foreach ($result as $record) {
 
             <?= $output ?>
             <?php foreach ($result as $record): ?>
-                <img src="<?php echo $record["photo"] ?>">
+                <img src="<?php echo $record["photo"] ?>" width="300px" height="200px">
             <?php endforeach; ?>
         </div>
 
