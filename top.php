@@ -54,13 +54,16 @@ foreach ($result as $record) {
     }
     $output .= "
     <div>
+    <div>
     <p>{$record["username"]}</p>
     <p>{$record["penguinname"]}</p>
     <p>{$record["birth"]}</p>
     <p>{$record["penguinvalue"]}</p>
     <p>{$record["feature"]}</p>
     <p>{$record["place"]}</p>
-
+    <td><img src={$record["photo"]} class='image'></td>
+    </div>
+    <div>
     <td><a href='like_create.php?user_id={$user_id}&todo_id={$record["penguin_id"]}'><img src=$images alt=PL class='bigfish'><hidden{$record['like_count']}></a></td>
     <td><a href='todo_edit.php?id={$record["id"]}'>edit</a></td>
     <td><a href='todo_delete.php?id={$record["id"]}'>delete</a></td>
@@ -98,9 +101,7 @@ foreach ($result as $record) {
         <div>
 
             <?= $output ?>
-            <?php foreach ($result as $record): ?>
-                <img src="<?php echo $record["photo"] ?>" width="300px" height="200px">
-            <?php endforeach; ?>
+
         </div>
 
     </div>
