@@ -65,8 +65,8 @@ foreach ($result as $record) {
     </div>
     <div>
     <td><a href='like_create.php?user_id={$user_id}&todo_id={$record["penguin_id"]}'><img src=$images alt=PL class='bigfish'><hidden{$record['like_count']}></a></td>
-    <td><a href='todo_edit.php?id={$record["id"]}'>edit</a></td>
-    <td><a href='todo_delete.php?id={$record["id"]}'>delete</a></td>
+    <td><a href='diary_edit.php?penguin_id={$record["penguin_id"]}'>編集する</a></td>
+    <td><a href='diary_delete.php?penguin_id={$record["penguin_id"]}'>削除する</a></td>
 
     <hr>
     </div>";
@@ -91,6 +91,7 @@ foreach ($result as $record) {
         <div>
             ログインユーザー：
             <?= $record["username"] ?>
+            <a href="logout.php">ログアウト</a>
         </div>
         <img src=".//img/bg.jpg" width="530" height="auto">
         <a href="penguin_register.php" class="next_btn">推しのペンギンを登録する</a>
@@ -103,7 +104,9 @@ foreach ($result as $record) {
             <?= $output ?>
 
         </div>
-
+        <div>
+            <input type="hidden" name="id" value="<?= $record['penguin_id'] ?>">
+        </div>
     </div>
     <div class="content">
         <div class="control">

@@ -32,7 +32,7 @@ if ($stmt->fetchColumn() > 0) {
     exit();
 }
 
-$sql = 'INSERT INTO users_table(id, email, password, is_admin, created_at, updated_at, deleted_at) VALUES(NULL, :email, :password, 0, now(), now(), NULL)';
+$sql = 'INSERT INTO users_table_00(id, email, password, is_admin, created_at, updated_at, deleted_at) VALUES(NULL, :email, :password, 0, now(), now(), NULL)';
 
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue(':email', $email, PDO::PARAM_STR);
